@@ -58,5 +58,13 @@ jQuery(document).ready(function($) {
 
     App.map.addLayer(App.layer);
 
+    // Handlebar helper
+    Handlebars.registerHelper('percentage', function(value, divisor) {
+        return ((value / divisor) * 100).toFixed(1);
+      });
+
+      Handlebars.registerHelper('lowercase', function(str) {
+        return str.toLowerCase();
+      });
 
 });
