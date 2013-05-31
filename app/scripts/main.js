@@ -1,1 +1,3 @@
-console.log('\'Allo \'Allo!');
+jQuery(document).ready(function($) {
+    console.log("Running jQuery " + $.fn.jquery);
+});
