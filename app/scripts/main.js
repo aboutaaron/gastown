@@ -34,7 +34,10 @@ jQuery(document).ready(function($) {
     App.ds.fetch({
         success: function() {
             this.each(function(row) {
-                // Underscore template of data
+                // Handlebar template of data
+                var source = $("#location-template").html();
+                var template = Handlebars.compile(source);
+                $("tbody#rental-data").append(template(row));
 
                 // Retreive AJAX response
                 $.ajax({
