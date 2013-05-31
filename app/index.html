@@ -57,9 +57,32 @@
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
 
+        <script id="location-template" type="text/x-handlebars-template">
+            <table>
+                <thead>
+                    <th>Address</th>
+                    <th>Owner</th>
+                    <th>Total Units</th>
+                    <th>Total Outstanding</th>
+                    <th>Percentage of Outstanding</th>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>{{  }}</td>
+                        <td>{{  }}</td>
+                        <td>{{  }}</td>
+                        <td>{{  }}</td>
+                        <td>{{  }}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </script>
+
         <!-- build:js scripts/main.js -->
         <script src="bower_components/jquery/jquery.js"></script>
-        <script src="bower_components/underscore/underscore.js"></script>
+        <script src="bower_components/handlebars/handlebars.js"></script>
         <script src="bower_components/tablesorter/js/jquery.tablesorter.js"></script>
         <script src="bower_components/leaflet/dist/leaflet.js"></script>
         <script src="bower_components/dataset/dist/miso.ds.deps.ie.0.4.1.js"></script>

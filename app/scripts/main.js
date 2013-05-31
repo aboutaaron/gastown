@@ -34,6 +34,7 @@ jQuery(document).ready(function($) {
     App.ds.fetch({
         success: function() {
             this.each(function(row) {
+                // Underscore template of data
 
                 // Retreive AJAX response
                 $.ajax({
