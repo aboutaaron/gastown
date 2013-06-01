@@ -1,22 +1,31 @@
+// Creating an object as to not pollute the global namesapce
 var App = App || {};
 
+// This is the function Bing returns when you use the REST API
 function GeocodeCallback(result) {
-    /*dataDebug = result;
-    App.rentalNames.push(result.resourceSets[0].resources[0].name);
-    App.rentalCoordinates.push(result.resourceSets[0].resources[0].point.coordinates);*/
 
-    var marker = L.marker(result.resourceSets[0].resources[0].point.coordinates).addTo(App.map);
-    marker.bindPopup(result.resourceSets[0].resources[0].name);
+    // Only add markers to the app that return full results
+    // Sometimes the geocode will return a status code of 200 (ok)
+    // but without any data
+    if (result.resourceSets[0].resources[0] !== undefined) {
+        // Add the coordinates to the map
+        App.marker = L.marker(result.resourceSets[0].resources[0].point.coordinates).addTo(App.map);
+        // Create a popup with the address of the coordinates
+        App.marker.bindPopup(result.resourceSets[0].resources[0].name);
+    }
 }
 
 jQuery(document).ready(function($) {
     'use strict';
 
+    // Function to fetch geocode
     function geocode(address) {
-        // lookup `address`
+        // Bing API key
         App.credentials = "AnhYJU1pFXh6M5Qn4zg4htWejzdN5VKZ_c8CC0MQdsCNHaxz-JzNbmwfsMyx3bDq";
-        // Possibly add regex to add `+` in between spaces
+
         App.vancouver = "+Vancouver+BC+Canada"
+        // Build the REST URL to fetch
+        // Quick regex to add '+' as spaces
         App.url = "http://dev.virtualearth.net/REST/v1/Locations?query=" + address.replace(/\s/g,"+") + App.vancouver + "&output=json&jsonp=GeocodeCallback&key=" + App.credentials;
         return App.url;
     }
@@ -25,7 +34,8 @@ jQuery(document).ready(function($) {
     App.ds = new Miso.Dataset({
         // The actual url is a FTP link so AJAX won't cut it due to CORS issues
         // ftp://webftp.vancouver.ca/opendata/csv/RentalStandardsCurrentIssues.csv
-        // Perhaps I should write a small script that downloads the file weekly
+
+        // Perhaps I should write a small script that downloads the file daily
         // and stores it to the app.
         url: 'RentalStandardsCurrentIssues.csv',
         delimiter: ','
@@ -37,7 +47,10 @@ jQuery(document).ready(function($) {
                 // Handlebar template of data
                 var source = $("#location-template").html();
                 var template = Handlebars.compile(source);
-                $("tbody#rental-data").append(template(row));
+                // Only load full values
+                if (row.STREET != null) {
+                    $("tbody#rental-data").append(template(row));
+                }
 
                 // Retreive AJAX response
                 $.ajax({
@@ -58,7 +71,7 @@ jQuery(document).ready(function($) {
 
     App.map.addLayer(App.layer);
 
-    // Handlebar helper
+    // Handlebar helper for some math
     Handlebars.registerHelper('percentage', function(value, divisor) {
         return ((value / divisor) * 100).toFixed(1);
       });
