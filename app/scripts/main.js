@@ -1,8 +1,7 @@
 // Creating an object as to not pollute the global namesapce
 var App = App || {};
 
-App.coordinates = [];
-App.streets = [];
+// Why is this a global?
 App.markers = new L.MarkerClusterGroup();
 
 // This is the function Bing returns when you use the REST API
@@ -67,6 +66,7 @@ jQuery(document).ready(function($) {
                 }
 
             });
+
         }
     });
 
