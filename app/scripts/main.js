@@ -12,9 +12,8 @@ function GeocodeCallback(result) {
     // Sometimes the geocode will return a status code of 200 (ok)
     // but without any data
 
-    // Alt
-    //App.marker = L.marker(result.resourceSets[0].resources[0].point.coordinates)
-    //App.marker.bindPopup(result.resourceSets[0].resources[0].name);
+    App.marker = L.marker(result.resourceSets[0].resources[0].point.coordinates)
+    App.marker.bindPopup(result.resourceSets[0].resources[0].name);
 
     if (result.resourceSets[0].resources[0] !== undefined) {
         // Add the coordinates to a map cluster and then add the cluster to the app
