@@ -75,15 +75,21 @@ jQuery(document).ready(function($) {
     App.map = new L.Map("map", {
         // Vancouver
         center: new L.LatLng(49.261226, -123.113927),
-        zoom: 12
+        zoom: 12,
+
+        // Options
+        scrollWheelZoom: false,
+        touchZoom: false,
+        doubleClickZoom: false,
+        //zoomControl: false,
+        dragging: false
     });
 
     // Load map to DOM
     App.map.addLayer(App.layer);
 
-
     // Handlebar helper for some math
     Handlebars.registerHelper('percentage', function(value, divisor) {
         return ((value / divisor) * 100).toFixed(1);
-      });
+    });
 });
