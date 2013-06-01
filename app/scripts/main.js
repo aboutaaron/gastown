@@ -1,15 +1,20 @@
 // Creating an object as to not pollute the global namesapce
 var App = App || {};
 
+App.coordinates = [];
+App.streets = [];
+
 // This is the function Bing returns when you use the REST API
 // As a result, it's global, hence why it's up here
 function GeocodeCallback(result) {
-
     // Only add markers to the app that return full results
     // Sometimes the geocode will return a status code of 200 (ok)
     // but without any data
     if (result.resourceSets[0].resources[0] !== undefined) {
         // Add the coordinates to the map
+        App.coordinates.push(result.resourceSets[0].resources[0].point.coordinates)
+        App.streets.push(result.resourceSets[0].resources[0].name)
+
         App.marker = L.marker(result.resourceSets[0].resources[0].point.coordinates).addTo(App.map);
         // Create a popup with the address of the coordinates
         App.marker.bindPopup(result.resourceSets[0].resources[0].name);
