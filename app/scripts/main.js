@@ -24,10 +24,9 @@ jQuery(document).ready(function($) {
         // Bing API key
         App.credentials = "AnhYJU1pFXh6M5Qn4zg4htWejzdN5VKZ_c8CC0MQdsCNHaxz-JzNbmwfsMyx3bDq";
 
-        App.vancouver = "+Vancouver+BC+Canada"
         // Build the REST URL to fetch
         // Quick regex to add '+' as spaces
-        App.url = "http://dev.virtualearth.net/REST/v1/Locations?query=" + address.replace(/\s/g,"+") + App.vancouver + "&output=json&jsonp=GeocodeCallback&key=" + App.credentials;
+        App.url = "http://dev.virtualearth.net/REST/v1/Locations?query=" + address.replace(/\s/g,"+") + "Vancouver+BC+Canada&output=json&jsonp=GeocodeCallback&key=" + App.credentials;
         return App.url;
     }
 
