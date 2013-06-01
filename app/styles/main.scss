@@ -9,6 +9,8 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 @import "../../bower_components/Leaflet.markercluster/dist/MarkerCluster.Default.css";
 @import "../../bower_components/Leaflet.markercluster/dist/MarkerCluster.Default.ie.css";
 
+@import "../bower_components/L.GeoSearch/src/css/l.geosearch.css";
+
 body {
     font-family: "Source Sans Pro", sans-serif;
 }

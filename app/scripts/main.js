@@ -81,12 +81,19 @@ jQuery(document).ready(function($) {
         scrollWheelZoom: false,
         touchZoom: false,
         doubleClickZoom: false,
-        //zoomControl: false,
+        zoomControl: false,
         dragging: false
     });
 
     // Load map to DOM
     App.map.addLayer(App.layer);
+
+    // Control
+    new L.Control.GeoSearch({
+        provider: new L.GeoSearch.Provider.Bing({
+            key: App.credentials
+        })
+    }).addTo(App.map);
 
     // Handlebar helper for some math
     Handlebars.registerHelper('percentage', function(value, divisor) {
