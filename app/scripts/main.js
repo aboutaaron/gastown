@@ -2,6 +2,7 @@
 var App = App || {};
 
 // This is the function Bing returns when you use the REST API
+// As a result, it's global, hence why it's up here
 function GeocodeCallback(result) {
 
     // Only add markers to the app that return full results
@@ -44,6 +45,15 @@ jQuery(document).ready(function($) {
     App.ds.fetch({
         success: function() {
             this.each(function(row) {
+
+                // Use Bing API to grab coordinates of locations
+                // The geocode function is used here
+                // GeocodeCallback is the response Bing sends back
+                $.ajax({
+                    url: geocode(row.STREETNUMBER + " " + row.STREET),
+                    dataType: 'jsonp'
+                });
+
                 // Handlebar template of data
                 var source = $("#location-template").html();
                 var template = Handlebars.compile(source);
@@ -51,12 +61,6 @@ jQuery(document).ready(function($) {
                 if (row.STREET != null) {
                     $("tbody#rental-data").append(template(row));
                 }
-
-                // Retreive AJAX response
-                $.ajax({
-                    url: geocode(row.STREETNUMBER + " " + row.STREET),
-                    dataType: 'jsonp'
-                });
 
             });
         }
