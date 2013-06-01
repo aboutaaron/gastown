@@ -3,6 +3,7 @@ var App = App || {};
 
 App.coordinates = [];
 App.streets = [];
+App.markers = new L.MarkerClusterGroup();
 
 // This is the function Bing returns when you use the REST API
 // As a result, it's global, hence why it's up here
@@ -18,6 +19,8 @@ function GeocodeCallback(result) {
         App.marker = L.marker(result.resourceSets[0].resources[0].point.coordinates).addTo(App.map);
         // Create a popup with the address of the coordinates
         App.marker.bindPopup(result.resourceSets[0].resources[0].name);
+
+        App.markers.addLayer(App.marker);
     }
 }
 
@@ -80,6 +83,8 @@ jQuery(document).ready(function($) {
 
     // Load map to DOM
     App.map.addLayer(App.layer);
+
+    App.map.addLayer(App.markers);
 
 
     // Handlebar helper for some math
