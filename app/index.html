@@ -44,7 +44,23 @@
             </div>
             <div class="span12" id="map"></div>
             <div class="span12">
-                <table class="table table-bordered table-hover">
+                <div class="row">
+                    <div class="span4">
+                        <h2>Avg. Units number</h2>
+                        <span class="avg-unit-size">42</span>
+                    </div>
+                    <div class="span4">
+                        <h2>Avg. Units number</h2>
+                        <span class="avg-unit-size">42</span>
+                    </div>
+                    <div class="span4">
+                        <h2>Avg. Units number</h2>
+                        <span class="avg-unit-size">42</span>
+                    </div>
+                </div>
+            </div>
+            <div class="span12">
+                <table class="table table-bordered table-hover" id="table">
                     <thead>
                         <th>Address</th>
                         <th>Owner</th>
@@ -91,10 +107,6 @@
         <!-- endbuild -->
 
         <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.1"></script>
-
-        <!-- build:js(.tmp) scripts/coffee.js -->
-        <script src="scripts/hello.js"></script>
-        <!-- endbuild -->
 
         <!-- build:js scripts/plugins.js -->
         <script src="bower_components/sass-bootstrap/js/bootstrap-affix.js"></script>
