@@ -11,7 +11,13 @@ function GeocodeCallback(result) {
     // Sometimes the geocode will return a status code of 200 (ok)
     // but without any data
     if (result.resourceSets[0].resources[0] !== undefined) {
-        App.marker = L.marker(result.resourceSets[0].resources[0].point.coordinates)
+        // Custom Markers
+        var redMarker = L.AwesomeMarkers.icon({
+            icon: 'coffee',
+            color: 'red'
+        });
+
+        App.marker = L.marker(result.resourceSets[0].resources[0].point.coordinates, { icon: redMarker });
         App.marker.bindPopup(result.resourceSets[0].resources[0].name);
         // Add the coordinates to a map cluster and then add the cluster to the app
         App.markers.addLayer(App.marker);
@@ -81,7 +87,7 @@ jQuery(document).ready(function($) {
         scrollWheelZoom: false,
         touchZoom: false,
         doubleClickZoom: false,
-        dragging: false,
+        //dragging: false,
         zoomControl: false
     });
 
@@ -94,7 +100,9 @@ jQuery(document).ready(function($) {
     new L.Control.GeoSearch({
         provider: new L.GeoSearch.Provider.Bing({
             key: App.credentials
-        })
+        }),
+        country: 'Canada',
+        zoomLevel: 16
     }).addTo(App.map);
 
     // Handlebar helper for some math
