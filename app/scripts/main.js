@@ -88,9 +88,4 @@ jQuery(document).ready(function($) {
     Handlebars.registerHelper('percentage', function(value, divisor) {
         return ((value / divisor) * 100).toFixed(1);
       });
-
-      Handlebars.registerHelper('lowercase', function(str) {
-        return str.toLowerCase();
-      });
-
 });
