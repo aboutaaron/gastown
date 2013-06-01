@@ -62,14 +62,17 @@ jQuery(document).ready(function($) {
         }
     });
 
-    // Setup Map
+    // Setup Leaflet map
     App.layer = new L.StamenTileLayer("toner");
     App.map = new L.Map("map", {
+        // Vancouver
         center: new L.LatLng(49.261226, -123.113927),
         zoom: 12
     });
 
+    // Load map to DOM
     App.map.addLayer(App.layer);
+
 
     // Handlebar helper for some math
     Handlebars.registerHelper('percentage', function(value, divisor) {
