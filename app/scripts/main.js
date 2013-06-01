@@ -81,14 +81,16 @@ jQuery(document).ready(function($) {
         scrollWheelZoom: false,
         touchZoom: false,
         doubleClickZoom: false,
-        zoomControl: false,
-        dragging: false
+        dragging: false,
+        zoomControl: false
     });
 
     // Load map to DOM
     App.map.addLayer(App.layer);
 
     // Control
+    new L.Control.Zoom({position: "topright"}).addTo(App.map);
+
     new L.Control.GeoSearch({
         provider: new L.GeoSearch.Provider.Bing({
             key: App.credentials
