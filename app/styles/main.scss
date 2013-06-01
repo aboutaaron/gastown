@@ -1,7 +1,13 @@
+// Bootstrap
 $iconSpritePath: "../images/glyphicons-halflings.png";
 $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 
 @import "sass-bootstrap/lib/bootstrap";
+
+// Leaflet
+@import "../../bower_components/Leaflet.markercluster/dist/MarkerCluster.css";
+@import "../../bower_components/Leaflet.markercluster/dist/MarkerCluster.Default.css";
+@import "../../bower_components/Leaflet.markercluster/dist/MarkerCluster.Default.ie.css";
 
 body {
     font-family: "Source Sans Pro", sans-serif;
