@@ -11,18 +11,18 @@ function GeocodeCallback(result) {
     // Only add markers to the app that return full results
     // Sometimes the geocode will return a status code of 200 (ok)
     // but without any data
+
+    // Alt
+    //App.marker = L.marker(result.resourceSets[0].resources[0].point.coordinates)
+    //App.marker.bindPopup(result.resourceSets[0].resources[0].name);
+
     if (result.resourceSets[0].resources[0] !== undefined) {
-        // Add the coordinates to the map
-        App.coordinates.push(result.resourceSets[0].resources[0].point.coordinates)
-        App.streets.push(result.resourceSets[0].resources[0].name)
-
-        App.marker = L.marker(result.resourceSets[0].resources[0].point.coordinates).addTo(App.map);
-        // Create a popup with the address of the coordinates
-        App.marker.bindPopup(result.resourceSets[0].resources[0].name);
-
+        // Add the coordinates to a map cluster and then add the cluster to the app
         App.markers.addLayer(App.marker);
+        App.map.addLayer(App.markers);
     }
 }
+
 
 jQuery(document).ready(function($) {
     'use strict';
@@ -83,8 +83,6 @@ jQuery(document).ready(function($) {
 
     // Load map to DOM
     App.map.addLayer(App.layer);
-
-    App.map.addLayer(App.markers);
 
 
     // Handlebar helper for some math
