@@ -14,7 +14,10 @@ function countme() {
 
 
 // Why is this a global?
-App.markers = new L.MarkerClusterGroup();
+App.markers = new L.MarkerClusterGroup({
+    showCoverageOnHover: false,
+    removeOutsideVisibleBounds: true
+});
 
 // This is the function Bing returns when you use the REST API
 // As a result, it's global, hence why it's up here
