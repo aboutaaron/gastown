@@ -24,7 +24,7 @@ function GeocodeCallback(result) {
     // Only add markers to the app that return full results
     // Sometimes the geocode will return a status code of 200 (ok)
     // but without any data
-    if (location !== undefined || null) {
+    try {
         // Custom Markers
         var redMarker = L.AwesomeMarkers.icon({
             icon: 'coffee',
@@ -35,6 +35,10 @@ function GeocodeCallback(result) {
         marker.bindPopup(location.name);
         // Add the coordinates to a map cluster and then add the cluster to the app
         markers.addLayer(marker);
+    }
+
+    catch(e) {
+        console.log(e.name + " | " + e.message);
     }
 }
 
