@@ -1,5 +1,8 @@
 // Creating an object as to not pollute the global namesapce
 var App = App || {}, swerve;
+App.totalUnits = 0;
+App.totalOutstanding = 0;
+
 
 // Why is this a global?
 App.markers = new L.MarkerClusterGroup({
@@ -60,6 +63,9 @@ jQuery(document).ready(function($) {
                 // Only load full values
                 if (row.STREET != null) {
 
+                    App.totalUnits += row.TOTALUNITS
+                    App.totalOutstanding += row.TOTALOUTSTANDING
+
                     // Use Bing API to grab coordinates of locations
                     // The geocode function is used here
                     // GeocodeCallback is the response Bing sends back
@@ -76,7 +82,17 @@ jQuery(document).ready(function($) {
                 } // if
 
                 // Charts
-                //new Chart($("#chart").get(0).getContext("2d")).Pie()
+                var data = [
+                    {
+                        value: App.totalUnits,
+                        color: "#F7464A"
+                    },
+                    {
+                        value: App.totalOutstanding,
+                        color: "#46BFBD"
+                    }
+                ];
+                new Chart($("#chart").get(0).getContext("2d")).Doughnut(data);
                 swerve = this;
             }); // success
 
