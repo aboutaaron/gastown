@@ -1,5 +1,5 @@
 // Creating an object as to not pollute the global namesapce
-var App = App || {}, swerve;
+var App = App || {};
 
 // Why is this a global?
 App.markers = new L.MarkerClusterGroup({
@@ -76,22 +76,22 @@ jQuery(document).ready(function($) {
             App.totalUnits = 0;
             App.totalOutstanding = 0;
 
+            // Remove null values
+            this.remove(function(row) { return row.STREET === null });
+
+            // iterate over rows
             this.each(function(row) {
-                // Only load full values
-                if (row.STREET != null) {
+                // Populate Averages
+                App.totalUnits += row.TOTALUNITS
+                App.totalOutstanding += row.TOTALOUTSTANDING
 
-                    App.totalUnits += row.TOTALUNITS
-                    App.totalOutstanding += row.TOTALOUTSTANDING
-
-                    fetchCoordinates(row.STREETNUMBER + "+" + row.STREET)
-
-                    createHandlebarTemplate(row)
-                } // if
+                // Fetch coordinates for map and add values to table template
+                fetchCoordinates(row.STREETNUMBER + "+" + row.STREET)
+                createHandlebarTemplate(row)
             }); // $.each
 
             App.averageUnit = App.totalUnits / this.length;
             App.averageOutstanding = App.totalOutstanding / this.length;
-
             console.log(App.averageUnit);
 
             // Charts
