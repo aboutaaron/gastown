@@ -1,5 +1,7 @@
 // Creating an object as to not pollute the global namesapce
 var Data = Data || {};
+var l = [];
+
 // Some Default info
 Data.bingKey = "AnhYJU1pFXh6M5Qn4zg4htWejzdN5VKZ_c8CC0MQdsCNHaxz-JzNbmwfsMyx3bDq";
 Data.totalUnits = 0;
@@ -44,7 +46,7 @@ jQuery(document).ready(function($) {
     function geocode(address) {
         // Build the REST URL to fetch
         // Quick regex to add '+' as spaces
-        var url = "http://dev.virtualearth.net/REST/v1/Locations?query=" + address + "+Vancouver+BC+Canada&output=json&jsonp=GeocodeCallback&key=" + Data.bingKey;
+        var url = "http://dev.virtualearth.net/REST/v1/Locations?query=" + address.replace(/\s+/,"+") + "+Vancouver+BC+Canada&output=json&jsonp=GeocodeCallback&suppressStatus=true&key=" + Data.bingKey;
         return url;
     }
 
