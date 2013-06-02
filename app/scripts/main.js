@@ -43,6 +43,16 @@ jQuery(document).ready(function($) {
         return App.url;
     }
 
+    function fetchCoordinates(value) {
+        // Use Bing API to grab coordinates of locations
+        // The geocode function is used here
+        // GeocodeCallback is the response Bing sends back
+        $.ajax({
+            url: geocode(value),
+            dataType: 'jsonp'
+        });
+    }
+
     // Grab CSV
     App.ds = new Miso.Dataset({
         // The actual url is a FTP link so AJAX won't cut it due to CORS issues
@@ -66,13 +76,7 @@ jQuery(document).ready(function($) {
                     App.totalUnits += row.TOTALUNITS
                     App.totalOutstanding += row.TOTALOUTSTANDING
 
-                    // Use Bing API to grab coordinates of locations
-                    // The geocode function is used here
-                    // GeocodeCallback is the response Bing sends back
-                    $.ajax({
-                        url: geocode(row.STREETNUMBER + "+" + row.STREET),
-                        dataType: 'jsonp'
-                    });
+                    fetchCoordinates(row.STREETNUMBER + "+" + row.STREET)
 
                     // Handlebar template of data
                     var source = $("#location-template").html();
