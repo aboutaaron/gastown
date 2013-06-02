@@ -53,6 +53,13 @@ jQuery(document).ready(function($) {
         });
     }
 
+    function createHandlebarTemplate(data) {
+        // Handlebar template of data
+        var source = $("#location-template").html();
+        var template = Handlebars.compile(source);
+        $("tbody#rental-data").append(template(data));
+    }
+
     // Grab CSV
     App.ds = new Miso.Dataset({
         // The actual url is a FTP link so AJAX won't cut it due to CORS issues
@@ -78,10 +85,7 @@ jQuery(document).ready(function($) {
 
                     fetchCoordinates(row.STREETNUMBER + "+" + row.STREET)
 
-                    // Handlebar template of data
-                    var source = $("#location-template").html();
-                    var template = Handlebars.compile(source);
-                    $("tbody#rental-data").append(template(row));
+                    createHandlebarTemplate(row)
                 } // if
             }); // $.each
 
