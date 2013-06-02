@@ -1,8 +1,5 @@
 // Creating an object as to not pollute the global namesapce
 var App = App || {}, swerve;
-App.totalUnits = 0;
-App.totalOutstanding = 0;
-
 
 // Why is this a global?
 App.markers = new L.MarkerClusterGroup({
@@ -59,6 +56,9 @@ jQuery(document).ready(function($) {
 
     App.ds.fetch({
         success: function() {
+            App.totalUnits = 0;
+            App.totalOutstanding = 0;
+
             this.each(function(row) {
                 // Only load full values
                 if (row.STREET != null) {
@@ -78,25 +78,28 @@ jQuery(document).ready(function($) {
                     var source = $("#location-template").html();
                     var template = Handlebars.compile(source);
                     $("tbody#rental-data").append(template(row));
-                    var addy = row.STREETNUMBER + " " + row.STREET;
                 } // if
+            }); // $.each
 
-                // Charts
-                var data = [
-                    {
-                        value: App.totalUnits,
-                        color: "#F7464A"
-                    },
-                    {
-                        value: App.totalOutstanding,
-                        color: "#46BFBD"
-                    }
-                ];
-                new Chart($("#chart").get(0).getContext("2d")).Doughnut(data);
-                swerve = this;
-            }); // success
+            App.averageUnit = App.totalUnits / this.length;
+            App.averageOutstanding = App.totalOutstanding / this.length;
 
-        }
+            console.log(App.averageUnit);
+
+            // Charts
+            var data = [
+                {
+                    value: App.averageUnit,
+                    color: "#F7464A"
+                },
+                {
+                    value: App.averageOutstanding,
+                    color: "#46BFBD"
+                }
+            ];
+            new Chart($("#chart").get(0).getContext("2d")).Pie(data);
+            swerve = this;
+        } // success
     });
 
     // Setup Leaflet map
