@@ -1,17 +1,5 @@
 // Creating an object as to not pollute the global namesapce
-var App = App || {};
-App.a = [];
-App.b = [];
-App.c = [];
-
-function countme() {
-    var v = App.b.length;
-    for (var i = 0; i <= v; i++) {
-        console.log(App.a.sort()[i] + " || " + App.b.sort()[i])
-    }
-}
-
-
+var App = App || {}, swerve;
 
 // Why is this a global?
 App.markers = new L.MarkerClusterGroup({
@@ -22,7 +10,6 @@ App.markers = new L.MarkerClusterGroup({
 // This is the function Bing returns when you use the REST API
 // As a result, it's global, hence why it's up here
 function GeocodeCallback(result) {
-    App.c.push(result)
     // Only add markers to the app that return full results
     // Sometimes the geocode will return a status code of 200 (ok)
     // but without any data
@@ -38,8 +25,6 @@ function GeocodeCallback(result) {
         // Add the coordinates to a map cluster and then add the cluster to the app
         App.markers.addLayer(App.marker);
         App.map.addLayer(App.markers);
-
-        App.a.push(result.resourceSets[0].resources[0].name.replace(/, Vancouver+.*/, ""));
     }
 }
 
@@ -88,9 +73,12 @@ jQuery(document).ready(function($) {
                     var template = Handlebars.compile(source);
                     $("tbody#rental-data").append(template(row));
                     var addy = row.STREETNUMBER + " " + row.STREET;
-                    App.b.push(addy.replace(/, Vancouver+.*/, ""));
-                }
-            });
+                } // if
+
+                // Charts
+                //new Chart($("#chart").get(0).getContext("2d")).Pie()
+                swerve = this;
+            }); // success
 
         }
     });
@@ -106,7 +94,6 @@ jQuery(document).ready(function($) {
         scrollWheelZoom: false,
         touchZoom: false,
         doubleClickZoom: false,
-        //dragging: false,
         zoomControl: false
     });
 
@@ -121,9 +108,7 @@ jQuery(document).ready(function($) {
             key: App.credentials
         }),
         country: 'Canada',
-        zoomLevel: 16,
-        // https://github.com/brianherbert/L.GeoSearch
-        showMarker: false
+        zoomLevel: 16
     }).addTo(App.map);
 
     // Handlebar helper for some math
