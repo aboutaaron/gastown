@@ -1,9 +1,7 @@
 var s,
 VancouverMap = {
     config: {
-        bingKey: "AnhYJU1pFXh6M5Qn4zg4htWejzdN5VKZ_c8CC0MQdsCNHaxz-JzNbmwfsMyx3bDq",
         defaultZoomLevel: 16,
-
         map: new L.Map("map", {
                 // Vancouver
                 center: new L.LatLng(49.261226, -123.113927),
@@ -30,9 +28,7 @@ VancouverMap = {
         var layer = new L.StamenTileLayer("toner");
         var zoomLayer = new L.Control.Zoom({position: "topright"});
         var geoSearchLayer = new L.Control.GeoSearch({
-            provider: new L.GeoSearch.Provider.Bing({
-                key: s.bingKey
-            }),
+            provider: new L.GeoSearch.Provider.Google(),
             country: 'Canada',
             zoomLevel: s.defaultZoomLevel
         });
