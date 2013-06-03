@@ -1,5 +1,5 @@
 var s,
-Kitsilano = {
+Gastown = {
     config: {
         defaultZoomLevel: 16,
         map: new L.Map("map", {
