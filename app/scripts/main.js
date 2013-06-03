@@ -46,6 +46,18 @@ function GeocodeCallback(result) {
 jQuery(document).ready(function($) {
     'use strict';
 
+    // Google Geocode
+    var geocoder = new google.maps.Geocoder();
+    function codeAddress(address) {
+        geocoder.geocode( { 'adddress': address }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                return results[0].geometry.location;
+            } else {
+                console.log("Geocode was not successful for the following reason: " + status);
+            }
+        } )
+    }
+
     // Function to fetch geocode
     function geocode(address) {
         // Build the REST URL to fetch
