@@ -44,7 +44,7 @@ function codeAddress(address) {
             var latlng = []
             latlng.push(results[0].geometry.location.jb);
             latlng.push(results[0].geometry.location.kb);
-            //return latlng;
+            return latlng;
             console.log(latlng);
         } else {
             console.log("Geocode was not successful for the following reason: " + status);
