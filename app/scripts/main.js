@@ -1,5 +1,5 @@
 var s,
-VancouverMap = {
+Kitsilano = {
     config: {
         defaultZoomLevel: 16,
         map: new L.Map("map", {
