@@ -48,10 +48,6 @@ VancouverMap = {
         markers.addTo(s.map);
     },
 
-    createMarker: function(lat, lng) {
-        new L.marker([lat,lng]).addTo(s.map);
-    },
-
     codeAddress: function(address) {
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': address, 'region': 'CA' }, function(results, status) {
