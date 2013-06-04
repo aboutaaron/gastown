@@ -1,4 +1,4 @@
-var Gastown = Gastown || {}, s;
+var Gastown = Gastown || {}, s, p;
 
 Gastown = {
     config: {
@@ -19,7 +19,8 @@ Gastown = {
             return ((value / divisor) * 100).toFixed(1);
         }),
         csv: "data/2013-06-03-rental-standards.csv",
-        pushToTemplate: false
+        pushToTemplate: true,
+        cluster: new L.MarkerClusterGroup()
     },
 
     init: function() {
@@ -53,19 +54,6 @@ Gastown = {
         markers.addTo(s.map);
     },
 
-    codeAddress: function(address) {
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode( { 'address': address, 'region': 'CA' }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                var coordinates = results[0].geometry.location;
-                console.log(coordinates);
-                return [coordinates.jb, coordinates.kb];
-            } else {
-                console.log("Geocode was not successful for the following reason: " + status);
-            }
-        })
-    },
-
     extractCSV: function(url) {
         // Miso Dataset
         var ds = new Miso.Dataset({
@@ -97,24 +85,22 @@ Gastown = {
             var source = $("#location-template").html();
             var template = Handlebars.compile(source);
             $("tbody#rental-data").append(template(row));
+
+            // Add Marker to cluster
+            Gastown.addMarkerToCluster(row.COORDINATES);
         });
+
+        s.map.addLayer(s.cluster);
 
         console.log("Template built. Your data contains " + data.length + " values and the following methods (extracted from the CSV headers): " + data.columnNames());
     },
 
-    buildCoordinates: function() {
-        // First remove null values
-        s.data.remove(function(row) { return row.STREET === null });
-        // Generate new column with latitude and longitude
-        s.data.addComputedColumn("coordinates", "string", function(row) {
-            var address = row.STREETNUMBER + " " + row.STREET
-            // Timeout
-            setTimeout(function() {
-                return Gastown.codeAddress(address);
-            }, 1000 * row._id);
-        });
-        // Points on map
-        L.marker()
+    addMarkerToCluster: function(coordinates) {
+        s.cluster.addLayer(new L.marker(coordinates))
+    },
+
+    constructPopUp: function(data) {
+
     }
 }
 
