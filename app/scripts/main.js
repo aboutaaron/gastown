@@ -17,7 +17,8 @@ Gastown = {
         data: 0,
         helpers: Handlebars.registerHelper('percentage', function(value, divisor) {
             return ((value / divisor) * 100).toFixed(1);
-        })
+        }),
+        pushToTemplate: false
     },
 
     init: function() {
@@ -75,13 +76,13 @@ Gastown = {
           error: function(error) { console.log(error) },
           success: function() {
             // First remove null values
-            this.remove(function(row) { return row.STREET === null });
-
-            // store
+            //this.remove(function(row) { return row.STREET === null });
             s.data = this;
 
-            // Build template
-            Gastown.buildTemplate(s.data);
+            // Construct template
+            if (s.pushToTemplate === true) {
+                Gastown.buildTemplate(this);
+            }
           }
         });
     },
@@ -97,7 +98,7 @@ Gastown = {
             $("tbody#rental-data").append(template(row));
         });
 
-        console.log("Template built. Your data contains " + s.data.length + " values and the following methods (extracted from the CSV headers): " + s.data.columnNames());
+        console.log("Template built. Your data contains " + data.length + " values and the following methods (extracted from the CSV headers): " + data.columnNames());
     },
 
     buildCoordinates: function() {
