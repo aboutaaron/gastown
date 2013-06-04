@@ -29,21 +29,28 @@
             <section id="map" class="span8"></section>
             <section class="span4" style="background: #fff;">
                 <header class="page-header">
-                    <h1>Vancouver</h1>
+                    <h1>Rentals in Vancouver</h1>
+                    <small>These are details about this app.</small>
                 </header>
-                <p>This dataset contains data of licenced rental properties with 5 or more units that have current (unresolved) by-law issues. These issues related to the enforcement of the following City of Vancouver by-laws:</p>
-                <ul>
-                    <li>Building Bylaw</li>
-                    <li>Electrical Bylaw</li>
-                    <li>Gas Fitting Bylaw</li>
-                    <li>Plumbing Services (Building Bylaw - Part 7)</li>
-                    <li>Sewer and Watercourse Bylaw</li>
-                    <li>Sign Bylaw</li>
-                    <li>Standards of Maintenance Bylaw</li>
-                    <li>Tree Protection Bylaw</li>
-                    <li>Untidy Premise Bylaw</li>
-                    <li>Zoning &amp; Development Bylaw</li>
-                </ul>
+                <section id="rental-details">
+                </section>
+                <br>
+                <aside id="about">
+                    <h3>About this data</h3>
+                    <p>This dataset contains data of licenced rental properties with 5 or more units that have current (unresolved) by-law issues. These issues related to the enforcement of the following City of Vancouver by-laws:</p>
+                    <ul>
+                        <li>Building Bylaw</li>
+                        <li>Electrical Bylaw</li>
+                        <li>Gas Fitting Bylaw</li>
+                        <li>Plumbing Services (Building Bylaw - Part 7)</li>
+                        <li>Sewer and Watercourse Bylaw</li>
+                        <li>Sign Bylaw</li>
+                        <li>Standards of Maintenance Bylaw</li>
+                        <li>Tree Protection Bylaw</li>
+                        <li>Untidy Premise Bylaw</li>
+                        <li>Zoning &amp; Development Bylaw</li>
+                    </ul>
+                </aside>
             </section>
         </section>
 
@@ -59,14 +66,13 @@
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
 
-        <script id="location-template" type="text/x-handlebars-template">
-            <tr>
-                <td>{{ STREETNUMBER }} {{ lowercase STREET }}</td>
-                <td>{{ BUSINESSOPERATOR }}</td>
-                <td>{{ TOTALUNITS }}</td>
-                <td>{{ TOTALOUTSTANDING }}</td>
-                <td>{{ percentage TOTALOUTSTANDING TOTALUNITS }}%</td>
-            </tr>
+        <script id="rental-details-template" type="text/x-handlebars-template">
+            <h2>{{ STREETNUMBER }} {{ lowercase STREET }}</h2>
+            <ul class="unstyled">
+                <li>Operated by: <span id="detail">{{ BUSINESSOPERATOR }}</span></li>
+                <li>Total number of units: <span id="detail">{{ TOTALUNITS }}</span></li>
+                <li>Current number of issues: <span id="detail">{{ TOTALOUTSTANDING }}</span> </li>
+            </ul>
         </script>
 
         <!-- build:js scripts/main.js -->

@@ -86,9 +86,9 @@ Gastown = {
 
         data.each(function(row) {
             // Handlebar template of data
-            var source = $("#location-template").html();
+            /*var source = $("#location-template").html();
             var template = Handlebars.compile(source);
-            $("tbody#rental-data").append(template(row));
+            $("tbody#rental-data").append(template(row));*/
 
             // Add Marker to cluster
             Gastown.addMarkerToCluster(row);
