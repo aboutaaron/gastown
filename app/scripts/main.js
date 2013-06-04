@@ -21,8 +21,9 @@ Gastown = {
         csv: "data/2013-06-03-rental-standards.csv",
         pushToTemplate: true,
         cluster: new L.MarkerClusterGroup({
+            // Change on.click zoom value
             showCoverageOnHover: false,
-            disableClusteringAtZoom: 18
+            disableClusteringAtZoom: 17
         })
     },
 
