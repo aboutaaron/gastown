@@ -13,7 +13,10 @@ Gastown = {
                 doubleClickZoom: false,
                 zoomControl: false
             }),
-        data: 0
+        data: 0,
+        helpers: Handlebars.registerHelper('percentage', function(value, divisor) {
+            return ((value / divisor) * 100).toFixed(1);
+        })
     },
 
     init: function() {
@@ -69,9 +72,27 @@ Gastown = {
         ds.fetch({
           error: function(error) { console.log(error) },
           success: function() {
+            // First remove null values
+            this.remove(function(row) { return row.STREET === null });
+
+            // store
             s.data = this;
-            console.log(this);
+
+            // Build template
+            Gastown.buildTemplate(s.data);
           }
+        });
+    },
+
+    buildTemplate: function(data) {
+        // Take an object, iterate over it
+        // and build a template from Handlebars
+
+        data.each(function(row) {
+            // Handlebar template of data
+            var source = $("#location-template").html();
+            var template = Handlebars.compile(source);
+            $("tbody#rental-data").append(template(row));
         });
     },
 
