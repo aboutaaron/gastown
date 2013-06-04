@@ -12,10 +12,12 @@ Gastown = {
                 touchZoom: false,
                 doubleClickZoom: false,
                 zoomControl: false
-            })
+            }),
+        data: 0
     },
 
     init: function() {
+        console.log("Pew pew pew pew!")
         // pull in config
         s = this.config;
 
@@ -49,10 +51,42 @@ Gastown = {
         geocoder.geocode( { 'address': address, 'region': 'CA' }, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 var coordinates = results[0].geometry.location;
-                new L.marker([coordinates.jb, coordinates.kb]).addTo(s.map);
+                console.log(coordinates);
+                return [coordinates.jb, coordinates.kb];
             } else {
                 console.log("Geocode was not successful for the following reason: " + status);
             }
         })
+    },
+
+    extractCSV: function(url) {
+        // Miso Dataset
+        var ds = new Miso.Dataset({
+          url : url,
+          delimiter : ","
+        });
+
+        ds.fetch({
+          error: function(error) { console.log(error) },
+          success: function() {
+            s.data = this;
+            console.log(this);
+          }
+        });
+    },
+
+    buildCoordinates: function() {
+        // First remove null values
+        s.data.remove(function(row) { return row.STREET === null });
+        // Generate new column with latitude and longitude
+        s.data.addComputedColumn("coordinates", "string", function(row) {
+            var address = row.STREETNUMBER + " " + row.STREET
+            // Timeout
+            setTimeout(function() {
+                return Gastown.codeAddress(address);
+            }, 1000 * row._id);
+        });
+        // Points on map
+        L.marker()
     }
 }
