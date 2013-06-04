@@ -68,48 +68,32 @@ Gastown = {
         ds.fetch({
           error: function(error) { console.log(error) },
           success: function() {
-            // First remove null values
-            //this.remove(function(row) { return row.STREET === null });
             s.data = this;
-
-            // Construct template
-            if (s.pushToTemplate === true) {
-                Gastown.buildTemplate(this);
-            }
+            Gastown.addMarkerToCluster(s.data);
           }
         });
     },
 
     buildTemplate: function(data) {
-        // Take an object, iterate over it
-        // and build a template from Handlebars
-
-        data.each(function(row) {
-            // Handlebar template of data
-            /*var source = $("#location-template").html();
-            var template = Handlebars.compile(source);
-            $("tbody#rental-data").append(template(row));*/
-
-            // Add Marker to cluster
-            Gastown.addMarkerToCluster(row);
-        });
-
-        s.map.addLayer(s.cluster);
-
-        console.log("Template built. Your data contains " + data.length + " values and the following methods (extracted from the CSV headers): " + data.columnNames());
+        // Take an object and build a template from Handlebars
+        // Handlebar template of data
+        var source = $("#location-template").html();
+        var template = Handlebars.compile(source);
+        $("tbody#rental-data").append(template(data));
+        //console.log("Template built. Your data contains " + data.length + " values and the following methods (extracted from the CSV headers): " + data.columnNames());
     },
 
     addMarkerToCluster: function(data) {
-        try {
-            return s.cluster.addLayer(new L.marker([data.LAT, data.LNG]))
-        }
-        catch(e) {
-            console.log(e.message);
-        }
-    },
+        // Take the JS Object
+        // Iterate over each
+        // Create a marker with Latitude and Longitude
+        // Store each marker in a cluster
+        data.each(function(row) {
+            s.cluster.addLayer(new L.marker([row.LAT, row.LNG]))
+        });
 
-    constructPopUp: function(data) {
-
+        // After iteration, add cluster to map
+        s.map.addLayer(s.cluster)
     }
 }
 
