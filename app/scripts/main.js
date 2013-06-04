@@ -20,7 +20,10 @@ Gastown = {
         }),
         csv: "data/2013-06-03-rental-standards.csv",
         pushToTemplate: true,
-        cluster: new L.MarkerClusterGroup()
+        cluster: new L.MarkerClusterGroup({
+            showCoverageOnHover: false,
+            disableClusteringAtZoom: 16
+        })
     },
 
     init: function() {
@@ -87,7 +90,7 @@ Gastown = {
             $("tbody#rental-data").append(template(row));
 
             // Add Marker to cluster
-            Gastown.addMarkerToCluster(row.COORDINATES);
+            Gastown.addMarkerToCluster(row);
         });
 
         s.map.addLayer(s.cluster);
@@ -95,8 +98,13 @@ Gastown = {
         console.log("Template built. Your data contains " + data.length + " values and the following methods (extracted from the CSV headers): " + data.columnNames());
     },
 
-    addMarkerToCluster: function(coordinates) {
-        s.cluster.addLayer(new L.marker(coordinates))
+    addMarkerToCluster: function(data) {
+        try {
+            return s.cluster.addLayer(new L.marker([data.LAT, data.LNG]))
+        }
+        catch(e) {
+            console.log(e.message);
+        }
     },
 
     constructPopUp: function(data) {
@@ -105,5 +113,6 @@ Gastown = {
 }
 
 jQuery(document).ready(function($) {
+    "use strict";
     Gastown.init();
 });
