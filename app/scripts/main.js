@@ -27,6 +27,7 @@ Gastown = {
 
         // Load Map
         this.createMap();
+        this.extractCSV("/data/RentalStandardsCurrentIssues.csv");
     },
 
     createMap: function() {
@@ -117,5 +118,4 @@ Gastown = {
 
 jQuery(document).ready(function($) {
     Gastown.init();
-    Gastown.extractCSV("/data/RentalStandardsCurrentIssues.csv");
 });
