@@ -39,7 +39,7 @@ Gastown = {
     createMap: function() {
         // Setup Leaflet map
         var layer = new L.StamenTileLayer("toner");
-        var zoomLayer = new L.Control.Zoom({position: "topright"});
+        var zoomLayer = new L.Control.Zoom({position: "bottomleft"});
         var geoSearchLayer = new L.Control.GeoSearch({
             provider: new L.GeoSearch.Provider.Google(),
             country: 'Canada',
