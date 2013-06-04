@@ -19,7 +19,6 @@ Gastown = {
             return ((value / divisor) * 100).toFixed(1);
         }),
         csv: "data/2013-06-03-rental-standards.csv",
-        pushToTemplate: true,
         cluster: new L.MarkerClusterGroup({
             // Change on.click zoom value
             showCoverageOnHover: false,
