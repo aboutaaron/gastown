@@ -114,3 +114,8 @@ Gastown = {
         L.marker()
     }
 }
+
+jQuery(document).ready(function($) {
+    Gastown.init();
+    Gastown.extractCSV("/data/RentalStandardsCurrentIssues.csv");
+});
