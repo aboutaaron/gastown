@@ -79,7 +79,7 @@ Gastown = {
         // Handlebar template of data
         var source = $("#rental-details-template").html();
         var template = Handlebars.compile(source);
-        $("#rental-details").append(template(data));
+        $("#rental-details").html(template(data));
         //console.log("Template built. Your data contains " + data.length + " values and the following methods (extracted from the CSV headers): " + data.columnNames());
     },
 
