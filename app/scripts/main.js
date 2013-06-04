@@ -1,4 +1,5 @@
-var s,
+var Gastown = Gastown || {}, s;
+
 Gastown = {
     config: {
         defaultZoomLevel: 16,
@@ -94,6 +95,8 @@ Gastown = {
             var template = Handlebars.compile(source);
             $("tbody#rental-data").append(template(row));
         });
+
+        console.log("Template built. Your data contains " + s.data.length + " values and the following methods (extracted from the CSV headers): " + s.data.columnNames());
     },
 
     buildCoordinates: function() {
