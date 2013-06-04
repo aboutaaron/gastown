@@ -22,7 +22,7 @@ Gastown = {
         pushToTemplate: true,
         cluster: new L.MarkerClusterGroup({
             showCoverageOnHover: false,
-            disableClusteringAtZoom: 16
+            disableClusteringAtZoom: 18
         })
     },
 
