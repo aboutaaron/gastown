@@ -18,6 +18,7 @@ Gastown = {
         helpers: Handlebars.registerHelper('percentage', function(value, divisor) {
             return ((value / divisor) * 100).toFixed(1);
         }),
+        csv: "data/2013-06-03-rental-standards.csv",
         pushToTemplate: false
     },
 
@@ -28,7 +29,7 @@ Gastown = {
 
         // Load Map
         this.createMap();
-        this.extractCSV("/data/RentalStandardsCurrentIssues.csv");
+        this.extractCSV(s.csv);
     },
 
     createMap: function() {
