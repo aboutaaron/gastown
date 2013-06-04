@@ -77,19 +77,24 @@ Gastown = {
     buildTemplate: function(data) {
         // Take an object and build a template from Handlebars
         // Handlebar template of data
-        var source = $("#location-template").html();
+        var source = $("#rental-details-template").html();
         var template = Handlebars.compile(source);
-        $("tbody#rental-data").append(template(data));
+        $("#rental-details").append(template(data));
         //console.log("Template built. Your data contains " + data.length + " values and the following methods (extracted from the CSV headers): " + data.columnNames());
     },
 
     addMarkerToCluster: function(data) {
         // Take the JS Object
         // Iterate over each
-        // Create a marker with Latitude and Longitude
-        // Store each marker in a cluster
         data.each(function(row) {
-            s.cluster.addLayer(new L.marker([row.LAT, row.LNG]))
+            // Create a marker with Latitude and Longitude
+            // Store each marker in a cluster
+            var m = new L.marker([row.LAT, row.LNG]);
+            s.cluster.addLayer(m);
+
+            m.on("click", function() {
+                Gastown.buildTemplate(row);
+            });
         });
 
         // After iteration, add cluster to map
