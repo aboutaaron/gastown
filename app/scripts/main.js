@@ -60,16 +60,16 @@ Gastown = {
     extractCSV: function(url) {
         // Miso Dataset
         var ds = new Miso.Dataset({
-          url : url,
-          delimiter : ","
+            url : url,
+            delimiter : ","
         });
 
         ds.fetch({
-          error: function(error) { console.log(error) },
-          success: function() {
-            s.data = this;
-            Gastown.addMarkerToCluster(s.data);
-          }
+            error: function(error) { console.log(error) },
+            success: function() {
+                s.data = this;
+                Gastown.addMarkerToCluster(s.data);
+            }
         });
     },
 
