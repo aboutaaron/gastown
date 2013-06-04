@@ -8,8 +8,6 @@ csv = CSV.open("app/data/RentalStandardsCurrentIssues.csv")
 
 csv.each do |row|
   full_address = "#{row[0]} #{row[1]}, Vancouver, BC, Canada"
-
-  #print "#{full_address}: "
   begin
     print Geocoder.coordinates(full_address)
     puts
