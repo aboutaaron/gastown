@@ -1,4 +1,4 @@
-/*global L:false, Handlebars:false, $:false, jQuery:false */
+/*global L:false, Handlebars:false, $:false, jQuery:false, Miso:false */
 
 var Gastown = Gastown || {}, s;
 
@@ -18,7 +18,7 @@ Gastown = {
         }),
         data: 0,
         helpers: Handlebars.registerHelper('percentage', function(value, divisor) {
-            "use strict";
+            'use strict';
             return ((value / divisor) * 100).toFixed(1);
         }),
         csv: 'data/2013-06-03-rental-standards.csv',
@@ -30,7 +30,7 @@ Gastown = {
     },
 
     init: function() {
-        "use strict";
+        'use strict';
 
         // pull in config
         s = this.config;
@@ -41,7 +41,7 @@ Gastown = {
     },
 
     createMap: function() {
-        "use strict";
+        'use strict';
 
         // Setup Leaflet map
         var layer = new L.StamenTileLayer('toner');
@@ -64,7 +64,7 @@ Gastown = {
     },
 
     extractCSV: function(url) {
-        "use strict";
+        'use strict';
 
         // Miso Dataset
         var ds = new Miso.Dataset({
@@ -82,7 +82,7 @@ Gastown = {
     },
 
     buildTemplate: function(data) {
-        "use strict";
+        'use strict';
         // Take an object and build a template from Handlebars
         // Handlebar template of data
         var source = $('#rental-details-template').html();
@@ -91,7 +91,7 @@ Gastown = {
     },
 
     addMarkerToCluster: function(data) {
-        "use strict";
+        'use strict';
         // Take the JS Object
         // Iterate over each
         data.each(function(row) {
@@ -111,6 +111,6 @@ Gastown = {
 };
 
 jQuery(document).ready(function() {
-    "use strict";
+    'use strict';
     Gastown.init();
 });
