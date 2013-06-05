@@ -7,7 +7,8 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 // Leaflet
 @import "_leaflet-clusters";
 
-@import "../bower_components/L.GeoSearch/src/css/l.geosearch.css";
+// Geosearch CSS (kind of ugly honestly)
+// @import "_geosearch";
 
 body {
     font-family: "Source Sans Pro", sans-serif;
