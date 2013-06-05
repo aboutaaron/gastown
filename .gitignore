@@ -1,6 +1,7 @@
 node_modules
 .tmp
 .sass-cache
+.bundle
 app/bower_components
 vendor
-geocode_csv.rb
+*.rb
