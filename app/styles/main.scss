@@ -5,9 +5,7 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 @import "sass-bootstrap/lib/bootstrap";
 
 // Leaflet
-@import "../../bower_components/Leaflet.markercluster/dist/MarkerCluster.css";
-@import "../../bower_components/Leaflet.markercluster/dist/MarkerCluster.Default.css";
-@import "../../bower_components/Leaflet.markercluster/dist/MarkerCluster.Default.ie.css";
+@import "_leaflet-clusters";
 
 @import "../bower_components/L.GeoSearch/src/css/l.geosearch.css";
 @import "../bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css";
