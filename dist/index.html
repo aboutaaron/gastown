@@ -1,0 +1,83 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="stylesheet" href="styles/81f212da.main.css">
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.css">
+
+        <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" type="text/css">
+
+        <script src="scripts/vendor/f7f27360.modernizr.js"></script>
+    </head>
+    <body>
+        <section class="row-fluid">
+            <section id="map" class="span8"></section>
+            <section class="span4">
+                <header class="page-header">
+                    <h1>Rentals in Vancouver</h1>
+                    <small>These are details about this app.</small>
+                </header>
+                <section id="rental-details">
+                    <span class="alert alert-info">Click on a map marker to see the property and its details.</span>
+                </section>
+                <br>
+                <aside id="about">
+                    <h3>About this data</h3>
+                    <p>This dataset contains data of licenced rental properties with 5 or more units that have current (unresolved) by-law issues. These issues related to the enforcement of the following City of Vancouver by-laws:</p>
+                    <ul>
+                        <li>Building Bylaw</li>
+                        <li>Electrical Bylaw</li>
+                        <li>Gas Fitting Bylaw</li>
+                        <li>Plumbing Services (Building Bylaw - Part 7)</li>
+                        <li>Sewer and Watercourse Bylaw</li>
+                        <li>Sign Bylaw</li>
+                        <li>Standards of Maintenance Bylaw</li>
+                        <li>Tree Protection Bylaw</li>
+                        <li>Untidy Premise Bylaw</li>
+                        <li>Zoning &amp; Development Bylaw</li>
+                    </ul>
+                </aside>
+                <footer>
+                    <p>Built by <a href="http://aboutaaron.com">@aboutaaron</a>. Source: <a href="http://data.vancouver.ca/datacatalogue/rentalStandards.htm">City of Vancouver</a>.</p>
+                </footer>
+            </section>
+        </section>
+
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+
+        <script id="rental-details-template" type="text/x-handlebars-template">
+            <h2>{{ STREETNUMBER }} {{ lowercase STREET }}</h2>
+            <ul class="unstyled">
+                <li>Operated by: <span id="detail">{{ BUSINESSOPERATOR }}</span></li>
+                <li>Total number of units: <span id="detail">{{ TOTALUNITS }}</span></li>
+                <li>Current number of issues: <span id="detail">{{ TOTALOUTSTANDING }}</span> </li>
+            </ul>
+        </script>
+
+        <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+        <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.1"></script>
+        <script src="scripts/c06947dc.deps.js"></script>
+
+        <script src="scripts/580b1c3e.app.js"></script>
+
+        <script src="scripts/76c21dca.plugins.js"></script>
+</body>
+</html>
